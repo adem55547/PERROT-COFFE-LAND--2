@@ -1,132 +1,133 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>مطعم ومقهى الراحة</title>
-  <style>
-    body { font-family: 'Arial', sans-serif; background-color: #f8f8f8; margin: 0; padding: 0; }
-    header { background-color: #8B0000; color: white; padding: 20px; text-align: center; }
-    nav { background-color: #eee; padding: 10px; text-align: center; }
-    nav a { margin: 0 15px; text-decoration: none; color: #333; font-weight: bold; }
-    .menu-section { padding: 20px; }
-    .item { background-color: white; margin: 10px 0; padding: 15px; border-radius: 8px; box-shadow: 0 0 5px #ccc; }
-    .item h3 { margin: 0; }
-    .item button { background-color: #8B0000; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; }
-    #cart { background-color: #fff; padding: 20px; margin: 20px; border-radius: 8px; box-shadow: 0 0 5px #ccc; }
-    #cart ul { list-style: none; padding: 0; }
-    #cart li { margin-bottom: 10px; }
-    form input, form textarea { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; }
-    form button { background-color: green; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer; }
-  </style>
-</head>
-<body>
-
-  <header>
-    <h1>مطعم ومقهى الراحة</h1>
-    <p>اختر طلبك وأكده بكل سهولة</p>
-  </header>
-
-  <nav>
-    <a href="#food">الأطعمة</a>
-    <a href="#drinks">المشروبات</a>
-    <a href="#desserts">الحلويات</a>
-    <a href="#cart">السلة</a>
-  </nav>
-
-  <div class="menu-section" id="food">
-    <h2>🍽️ الأطعمة</h2>
-    <div class="item">
-      <h3>شاورما دجاج</h3>
-      <p>سندويتش شاورما مع صوص خاص</p>
-      <button onclick="addToCart('شاورما دجاج')">أضف إلى السلة</button>
-    </div>
-    <div class="item">
-      <h3>بيتزا مارجريتا</h3>
-      <p>جبنة موزاريلا وطماطم طازجة</p>
-      <button onclick="addToCart('بيتزا مارجريتا')">أضف إلى السلة</button>
-    </div>
-  </div>
-
-  <div class="menu-section" id="drinks">
-    <h2>☕ المشروبات</h2>
-    <div class="item">
-      <h3>قهوة تركية</h3>
-      <p>قهوة قوية بطابع شرقي</p>
-      <button onclick="addToCart('قهوة تركية')">أضف إلى السلة</button>
-    </div>
-    <div class="item">
-      <h3>عصير برتقال طبيعي</h3>
-      <p>عصير طازج بدون إضافات</p>
-      <button onclick="addToCart('عصير برتقال طبيعي')">أضف إلى السلة</button>
-    </div>
-  </div>
-
-  <div class="menu-section" id="desserts">
-    <h2>🍰 الحلويات</h2>
-    <div class="item">
-      <h3>كنافة بالقشطة</h3>
-      <p>كنافة طرية مع قشطة وعسل</p>
-      <button onclick="addToCart('كنافة بالقشطة')">أضف إلى السلة</button>
-    </div>
-    <div class="item">
-      <h3>تشيز كيك الفراولة</h3>
-      <p>تشيز كيك مع صوص الفراولة</p>
-      <button onclick="addToCart('تشيز كيك الفراولة')">أضف إلى السلة</button>
-    </div>
-  </div>
-
-  <div id="cart">
-    <h2>🛒 السلة</h2>
-    <ul id="cartItems"></ul>
-
-    <h3>📋 تأكيد الطلب</h3>
-    <form onsubmit="submitOrder(event)">
-      <input type="text" id="name" placeholder="الاسم الكامل" required>
-      <input type="tel" id="phone" placeholder="رقم الهاتف" required>
-      <textarea id="notes" placeholder="ملاحظات إضافية (اختياري)"></textarea>
-      <button type="submit">تأكيد الطلب</button>
-    </form>
-    <p id="confirmation" style="color: green;"></p>
-  </div>
-
-  <script>
-    let cart = [];
-
-    function addToCart(item) {
-      cart.push(item);
-      updateCart();
-    }
-
-    function updateCart() {
-      const cartList = document.getElementById('cartItems');
-      cartList.innerHTML = '';
-      cart.forEach((item, index) => {
-        const li = document.createElement('li');
-        li.textContent = `${index + 1}. ${item}`;
-        cartList.appendChild(li);
-      });
-    }
-
-    function submitOrder(event) {
-      event.preventDefault();
-      const name = document.getElementById('name').value;
-      const phone = document.getElementById('phone').value;
-      const notes = document.getElementById('notes').value;
-
-      if (cart.length === 0) {
-        alert("السلة فارغة! أضف طلبات أولاً.");
-        return;
-      }
-
-      document.getElementById('confirmation').textContent =
-        `شكرًا ${name}! تم استلام طلبك وسنتواصل معك على الرقم ${phone}.`;
-
-      cart = [];
-      updateCart();
-      event.target.reset();
-    }
-  </script>
-
-</body>
+<!DOCTYPE html> 
+<html lang="ar"> 
+<head> 
+  <meta charset="UTF-8"> 
+  <title>مطعم 3D</title> 
+  <style> 
+    body { margin: 0; overflow: hidden; background: #222; } 
+    canvas { display: block; } 
+  </style> 
+</head> 
+<body> 
+ 
+<!-- مكتبات Three.js --> 
+<script src="https://cdn.jsdelivr.net/npm/three@0.150.0/build/three.min.js"></script> 
+<script src="https://cdn.jsdelivr.net/npm/three@0.150.0/examples/js/controls/OrbitControls.js"></script> 
+<script src="https://cdn.jsdelivr.net/npm/three@0.150.0/examples/js/loaders/GLTFLoader.js"></script> 
+ 
+<script> 
+  // 1. المشهد والكاميرا 
+  const scene = new THREE.Scene(); 
+  scene.background = new THREE.Color(0x222222); 
+ 
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000); 
+  camera.position.set(0, 3, 8); 
+  camera.lookAt(0, 1.5, 0); 
+ 
+  const renderer = new THREE.WebGLRenderer({antialias: true}); 
+  renderer.setSize(window.innerWidth, window.innerHeight); 
+  document.body.appendChild(renderer.domElement); 
+ 
+  // 2. إضاءة 
+  const light = new THREE.PointLight(0xffffff, 2); 
+  light.position.set(5, 10, 5); 
+  scene.add(light); 
+ 
+  const ambient = new THREE.AmbientLight(0x888888); 
+  scene.add(ambient); 
+ 
+  // 3. تحكم بالماوس 
+  const controls = new THREE.OrbitControls(camera, renderer.domElement); 
+ 
+  // 4. أرضية 
+  const floorGeo = new THREE.PlaneGeometry(20, 20); 
+  const floorMat = new THREE.MeshPhongMaterial({color: 0x444444}); 
+  const floor = new THREE.Mesh(floorGeo, floorMat); 
+  floor.rotation.x = -Math.PI / 2; 
+  scene.add(floor); 
+ 
+  // 5. طاولة خشبية 
+  const tableGeo = new THREE.CylinderGeometry(2, 2, 0.3, 32); 
+  const tableMat = new THREE.MeshPhongMaterial({color: 0x8B4513}); 
+  const table = new THREE.Mesh(tableGeo, tableMat); 
+  table.position.y = 1.5; 
+  scene.add(table); 
+ 
+  // أرجل الطاولة - تصحيح المواقع
+  const legGeo = new THREE.CylinderGeometry(0.2, 0.3, 1.5, 16); 
+  const legMat = new THREE.MeshPhongMaterial({color: 0x5C3317}); 
+  
+  // إنشاء أربعة أرجل للطاولة
+  for(let i=0; i<4; i++) {
+    const leg = new THREE.Mesh(legGeo, legMat);
+    const angle = (i / 4) * Math.PI * 2;
+    leg.position.set(
+      Math.cos(angle) * 1.5, // X position
+      0.75,                  // Y position (half height of leg)
+      Math.sin(angle) * 1.5  // Z position
+    );
+    scene.add(leg);
+  }
+ 
+  // 6. بيتزا بسيطة 
+  const pizzaGeo = new THREE.CylinderGeometry(1.5, 1.5, 0.2, 32); 
+  const pizzaMat = new THREE.MeshPhongMaterial({color: 0xffcc66}); 
+  const pizza = new THREE.Mesh(pizzaGeo, pizzaMat); 
+  pizza.position.y = 1.7; 
+  scene.add(pizza); 
+ 
+  // قطع سلامي 
+  const pepperoniMat = new THREE.MeshPhongMaterial({color: 0xcc0000}); 
+  for(let i=0;i<8;i++){ 
+    const pepperoni = new THREE.Mesh(new THREE.CircleGeometry(0.2,16), pepperoniMat); 
+    pepperoni.position.set(Math.cos(i/8 * Math.PI*2)*0.8, 1.81, Math.sin(i/8 * Math.PI*2)*0.8); 
+    pepperoni.rotation.x = -Math.PI/2; 
+    scene.add(pepperoni); 
+  } 
+ 
+  // إضافة كوب قهوة
+  const cupBaseGeo = new THREE.CylinderGeometry(0.3, 0.2, 0.6, 16);
+  const cupBaseMat = new THREE.MeshPhongMaterial({color: 0xffffff});
+  const cupBase = new THREE.Mesh(cupBaseGeo, cupBaseMat);
+  cupBase.position.set(-1.2, 1.8, 0);
+  scene.add(cupBase);
+  
+  // قهوة داخل الكوب
+  const coffeeGeo = new THREE.CylinderGeometry(0.28, 0.18, 0.1, 16);
+  const coffeeMat = new THREE.MeshPhongMaterial({color: 0x3c2312});
+  const coffee = new THREE.Mesh(coffeeGeo, coffeeMat);
+  coffee.position.set(-1.2, 2.05, 0);
+  scene.add(coffee);
+  
+  // بخار القهوة
+  const steamMat = new THREE.MeshBasicMaterial({color: 0xffffff, transparent: true, opacity: 0.3});
+  for(let i=0; i<5; i++) {
+    const steamGeo = new THREE.SphereGeometry(0.05 + Math.random() * 0.05, 8, 8);
+    const steam = new THREE.Mesh(steamGeo, steamMat);
+    steam.position.set(
+      -1.2 + (Math.random() * 0.2 - 0.1),
+      2.2 + (i * 0.1),
+      (Math.random() * 0.2 - 0.1)
+    );
+    scene.add(steam);
+  }
+ 
+  // 8. حلقة التحريك 
+  function animate(){ 
+    requestAnimationFrame(animate); 
+    pizza.rotation.y += 0.01; // البيتزا تدور 
+    controls.update(); 
+    renderer.render(scene,camera); 
+  } 
+  animate(); 
+ 
+  // 9. تحديث عند تغيير حجم الشاشة 
+  window.addEventListener('resize', ()=>{ 
+    camera.aspect = window.innerWidth/window.innerHeight; 
+    camera.updateProjectionMatrix(); 
+    renderer.setSize(window.innerWidth, window.innerHeight); 
+  }); 
+</script> 
+ 
+</body> 
 </html>
